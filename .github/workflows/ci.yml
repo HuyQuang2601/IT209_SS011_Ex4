@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  registry-login:
+    name: Kiem tra dang nhap GHCR
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dang nhap vao GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.REGISTRY_TOKEN }}
